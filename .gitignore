@@ -6,3 +6,8 @@
 
 #dont add server uploads to the repo.
 ./server/storage
+./client/storage
+
+#.env files.
+./client/.env
+./server/.env
