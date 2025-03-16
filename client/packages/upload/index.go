@@ -60,7 +60,7 @@ func Upload() {
 				continue
 			}
 			writer.Close()
-			req, err := http.NewRequest("POST", "http://127.0.0.1:5000", &requestBody)
+			req, err := http.NewRequest("POST", os.Getenv("API_URL"), &requestBody)
 
 			if err != nil {
 				color.Red("could not create upload request")

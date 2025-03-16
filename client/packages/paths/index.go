@@ -4,12 +4,19 @@ import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/inancgumus/screen"
+	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func Bootstrap() {
+	err := godotenv.Load()
+
+	if err != nil {
+		panic("could not load .env file")
+	}
+
 	if !CreateConfigDirectory() {
 		panic("config directory does not exists and could not be made")
 	}

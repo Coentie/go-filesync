@@ -9,6 +9,7 @@ func Router() *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Post("/", controllers.Upload)
+	r.Get("/files", controllers.Files)
 
 	return r
 }

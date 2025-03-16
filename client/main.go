@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/coentie/filesync/packages/download"
 	"github.com/coentie/filesync/packages/paths"
 	"github.com/coentie/filesync/packages/upload"
 	"os"
@@ -28,5 +29,6 @@ func main() {
 
 	if os.Args[1] == sync {
 		upload.Upload()
+		download.Download()
 	}
 }
