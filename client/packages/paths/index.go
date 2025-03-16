@@ -34,9 +34,8 @@ func Manage() {
 		}
 
 		color.Green("Please choose what you want to do:")
-		color.Yellow("1) View current paths")
-		color.Yellow("2) Add to paths")
-		color.Yellow("3) Remove from paths")
+		color.Yellow("1) View current path")
+		color.Yellow("2) Set path")
 		color.Yellow("6) Exit application")
 
 		_, err := fmt.Scan(&action)
@@ -51,9 +50,7 @@ func Manage() {
 		case 1:
 			List()
 		case 2:
-			Add()
-		case 3:
-			Remove()
+			Set()
 		case 6:
 			Exit()
 		default:
@@ -84,8 +81,8 @@ func List() {
 	}
 }
 
-// Add input to the path file.
-func Add() {
+// Set path to the config file.
+func Set() {
 	var pathInput string
 
 	color.Green("Please input your path you'd like to sync")
@@ -95,6 +92,7 @@ func Add() {
 
 	if err != nil {
 		color.Red("Could not read path. Check path or input another one")
+		fmt.Println(err)
 		return
 	}
 
@@ -105,7 +103,7 @@ func Add() {
 		return
 	}
 
-	contents.Paths = append(contents.Paths, pathInput)
+	contents.Paths = []string{pathInput}
 	err = WriteContents(contents)
 
 	if err != nil {
@@ -117,43 +115,6 @@ func Add() {
 	return
 }
 
-// Remove PATH from list
-func Remove() {
-	var inputIndex int
-
-	color.Green("Please input index number of path you'd like to remove.")
-	color.White("To get index, view all paths first.")
-
-	_, err := fmt.Scan(&inputIndex)
-
-	if err != nil {
-		color.Red("Please enter a number. Returning to menu")
-		return
-	}
-
-	contents, err := GetContents()
-
-	if err != nil {
-		color.Red("Could not read contents of pathfile. Please check pathfile")
-		return
-	}
-
-	if inputIndex < 0 || inputIndex > len(contents.Paths) {
-		color.Red("Given index is not within the range of pathlist. Please view pathfile first")
-		return
-	}
-
-	contents.Paths = append(contents.Paths[:inputIndex], contents.Paths[inputIndex+1:]...)
-	err = WriteContents(contents)
-
-	if err != nil {
-		color.Red("Could not write to path file")
-		return
-	}
-
-	color.Green("Succesfully removed from paths")
-}
-
 // Exit application
 func Exit() {
 	fmt.Println("Bye")
@@ -161,5 +122,5 @@ func Exit() {
 
 // CouldNotReadAction Panic response if the action could not be read.
 func CouldNotReadAction() {
-	fmt.Println("Could not read action. Please select out of 1, 2, 3 or 6")
+	fmt.Println("Could not read action. Please select out of 1, 2 or 6")
 }

@@ -1,0 +1,20 @@
+QURPLUS Meldingen layout wijzigingen. 
+- Algemene wijziging menu:
+	- Iets meer contrast toegepast om het menu iets meer te "laten poppen"
+- Meldingen en workflow worden samengevoegd in 1 centrale pagina. Dit vereenvoudigd de applicatie door wat "bloat" weg te halen. Daarnaast zorgt het voor 1 centrale plek voor de data van een melding. 
+- Verandering "organisatie beheer balk":
+	- Organisaties in een dropdownlijst gezet. Het is rustiger op de pagina, en overzichtelijker voor de gebruiker om de organisatie te vinden, in plaats van horizontaal te moeten scrollen. 
+	- "Organisatie beheren" knop hetzelfde gemaakt als informatie knop. Consistentie op de pagina. 
+- Submenu toegevoegd om de verschillende elementen van de pagina's in te verdelen.
+	- Menu is inklapbaar om meer ruimte maken om data te tonen.
+	- Dashboards & Rapportages
+		- Tabel met meldingen per gebouw
+		- Maatwerk rapportages
+	- Email 
+		- Openstaande emails
+	- Melding
+		- Alle meldingen
+			- Snelle filters tonnen alle meldingen met filters
+- Vrije velden verplaatst naar bibliotheek. Het is logischer dat het daar staat sinds het te maken heeft met attributen van elementen en overige entiteiten
+- Kiezen van een herstel activiteit vervangen van knoppen naar radio inputs. Dit heeft de volgende voordelen
+	- Het geeft de gebruiker duidelijkheid dat ze iets aan de melding gaan aanpassen, of iets gaan uitvoeren. Niet meer dat er "ineens" wat gebeurd omdat ze op een knop klikken.

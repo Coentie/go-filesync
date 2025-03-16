@@ -5,11 +5,11 @@ APP_NAME=client
 build:
 	go build -o $(APP_NAME) .
 
-run: build
+manage: build
 	@echo "Running $(APP_NAME)..."
-	@./$(APP_NAME) sync
+	@./$(APP_NAME) manage
 
-download: build
+sync: build
 	@./$(APP_NAME) sync
 
 clean:
