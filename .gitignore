@@ -1,0 +1,8 @@
+.idea
+
+#compiled
+./client/client
+./server/server
+
+#dont add server uploads to the repo.
+./server/storage/*

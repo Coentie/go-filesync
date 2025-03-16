@@ -8,12 +8,14 @@ import (
 )
 
 func Upload(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("in controller")
 	// Limit the size of the request body (e.g., 10MB)
 	r.ParseMultipartForm(10 << 20)
 
 	// Retrieve the file from form-data
 	file, handler, err := r.FormFile("file")
 	if err != nil {
+		fmt.Println(err)
 		http.Error(w, "Error retrieving file", http.StatusBadRequest)
 		return
 	}

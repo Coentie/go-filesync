@@ -4,13 +4,15 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/coentie/filesync/packages/paths"
+	"github.com/fatih/color"
+	"io"
+	"mime/multipart"
 	"net/http"
 	"os"
 	"path/filepath"
 )
 
 func Upload() {
-	fmt.Println("in upload")
 	contents, err := paths.GetContents()
 
 	if err != nil {
@@ -31,20 +33,52 @@ func Upload() {
 				continue
 			}
 
-			fmt.Println(entry.Name())
+			color.Green("processing file: %s", entry.Name())
 
-			contents, err := os.ReadFile(filepath.Join(path, entry.Name()))
+			file, err := os.Open(filepath.Join(path, entry.Name()))
 
 			if err != nil {
-				fmt.Println("could not read file", path)
+				color.Red("could not open file")
 				continue
 			}
 
-			_, err = http.Post("http://127.0.0.1:5000", "multipart/form-data", bytes.NewBuffer(contents))
+			defer file.Close()
+
+			// Create a buffer to store the multipart form data
+			var requestBody bytes.Buffer
+			writer := multipart.NewWriter(&requestBody)
+
+			part, err := writer.CreateFormFile("file", filepath.Base(entry.Name()))
 
 			if err != nil {
-				fmt.Println("could not upload file", err)
+				color.Red("could not create form file")
+				continue
 			}
+
+			if _, err = io.Copy(part, file); err != nil {
+				color.Red("could not copy file")
+				continue
+			}
+			writer.Close()
+			req, err := http.NewRequest("POST", "http://127.0.0.1:5000", &requestBody)
+
+			if err != nil {
+				color.Red("could not create upload request")
+				continue
+			}
+
+			req.Header.Set("Content-Type", writer.FormDataContentType())
+			resp, err := http.DefaultClient.Do(req)
+
+			if err != nil {
+				color.Red("could not upload file", err)
+				continue
+			}
+
+			fmt.Println(resp)
+
+			defer resp.Body.Close()
+
 			fmt.Println("uploaded", entry.Name())
 		}
 	}
