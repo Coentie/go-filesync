@@ -9,5 +9,8 @@ run: build
 	@echo "Running $(APP_NAME)..."
 	@./$(APP_NAME) sync
 
+download: build
+	@./$(APP_NAME) sync
+
 clean:
 	rm -f $(APP_NAME)

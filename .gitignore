@@ -5,4 +5,4 @@
 ./server/server
 
 #dont add server uploads to the repo.
-./server/storage/*
+./server/storage

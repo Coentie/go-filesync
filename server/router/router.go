@@ -10,6 +10,7 @@ func Router() *chi.Mux {
 
 	r.Post("/", controllers.Upload)
 	r.Get("/files", controllers.Files)
+	r.Get("/download/{filename}", controllers.Download)
 
 	return r
 }
